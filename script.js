@@ -61,13 +61,37 @@ function distance(p1, p2) {
 }
 
 // 8. No default case in switch (SonarQube: squid:S131)
-function getAngleType(angle) {
-  switch(angle) {
-    case 90:
-      return "right";
-    case 60:
-      return "equilateral";
+function getTriangleType(angles) {
+  const { angleA, angleB, angleC } = angles;
+  let type = 'scalene';
+  
+  // This switch statement violates the rule by having non-case labels
+  switch (true) {
+    // Valid case labels:
+    case angleA === 60 && angleB === 60 && angleC === 60:
+      type = 'equilateral';
+      break;
+      
+    case angleA === 90 || angleB === 90 || angleC === 90:
+      type = 'right-angled';
+      break;
+    
+    // Violation: non-case label (a variable declaration)
+    const sum = angleA + angleB + angleC;  // Noncompliant
+    
+    // Violation: non-case label (an if statement)
+    if (sum !== 180) {  // Noncompliant
+      console.error("Invalid triangle angles");
+    }
+    
+    // Violation: non-case label (a function call)
+    logTriangleType(type);  // Noncompliant
+    
+    default:
+      type = 'scalene';
   }
+  
+  return type;
 }
 
 // 9. Console.log left in code (SonarQube: squid:S2228)
