@@ -1,0 +1,17 @@
+body, html { 
+  margin: 0; 
+  padding: 0; 
+  overflow: hidden; 
+}
+
+canvas { 
+  border: 1px solid #000; 
+  display: block; 
+  margin: 20px auto; 
+}
+
+.output { 
+  margin: 10px; 
+  font-size: 18px; 
+  text-align: center; 
+}
